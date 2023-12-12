@@ -45,7 +45,34 @@ async function main() {
       },
     },
   })
-  console.log('i', i)
+  const j = await prisma.item.create({
+    data: {
+      title: 'New floors',
+      notes: {
+        create: [
+          {
+            body: 'Brandon recommends walnut flooring. Says it will last the longest',
+          },
+        ]
+      },
+      contacts: {
+        create: [
+          {
+            name: 'Brandon Bradshaw',
+            phones: {
+              create: [
+                {
+                  phone: '333-333-3333',
+                  phone_type: 'mobile',
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  })
+  console.log('output', [i, j].map(x => x))
 }
 
 main()
