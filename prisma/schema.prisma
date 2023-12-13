@@ -11,13 +11,13 @@ datasource db {
 model Item {
   id           Int       @id @default(autoincrement())
   // id String @id @default(uuid())                 // can do this
-  title        String
+  title        String    
   notes        Note[]
   contacts     Contact[]
-  due_at       DateTime?
-  completed_at DateTime?
-  created_at   DateTime  @default(now())
-  modified_at  DateTime  @updatedAt
+  dueAt        DateTime? @map("due_at")
+  completedAt  DateTime? @map("completed_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  modifiedAt  DateTime  @updatedAt @map("modified_at")
 
   @@map("items")
 }
@@ -27,8 +27,8 @@ model Note {
   body        String
   item        Item     @relation(fields: [item_id], references: [id])
   item_id     Int // scalar field
-  created_at  DateTime @default(now())
-  modified_at DateTime @updatedAt
+  createdAt  DateTime @default(now()) @map("created_at")
+  modifiedAt DateTime @updatedAt @map("modified_at")
 
   @@map("notes")
 }
@@ -39,8 +39,8 @@ model Contact {
   phones      Phone[]
   item        Item     @relation(fields: [item_id], references: [id])
   item_id     Int
-  created_at  DateTime @default(now())
-  modified_at DateTime @updatedAt
+  createdAt  DateTime @default(now()) @map("created_at")
+  modifiedAt DateTime @updatedAt @map("modified_at")
 
   @@map("contacts")
 }
@@ -48,7 +48,7 @@ model Contact {
 model Phone {
   id         Int     @id @default(autoincrement())
   phone      String
-  phone_type String
+  phoneType String @map("phone_type")
   contact    Contact @relation(fields: [contact_id], references: [id])
   contact_id Int
 

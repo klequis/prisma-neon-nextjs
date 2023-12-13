@@ -6,10 +6,10 @@ export interface ItemType {
   title: string
   notes: Note[]
   contacts: Contact[]
-  due_at?: Date
-  completed_at?: Date
-  created_at: Date
-  modified_at: Date
+  dueAt?: Date
+  completeddueAt?: Date
+  createdAt: Date
+  modifiedAt: Date
 }
 
 const prisma = new PrismaClient()
@@ -34,6 +34,6 @@ export default async function Home() {
 /*
 
 Missing "key" prop for element in iteratoreslintreact/jsx-key
-Type '{ item: { id: number; title: string; due_at: Date | null; completed_at: Date | null; created_at: Date; modified_at: Date; }; }' is not assignable to type 'IntrinsicAttributes & { id: number; title: string; due_at: Date | null; completed_at: Date | null; created_at: Date; modified_at: Date; }'.
-  Property 'item' does not exist on type 'IntrinsicAttributes & { id: number; title: string; due_at: Date | null; completed_at: Date | null; created_at: Date; modified_at: Date; }'.ts(2322)
+Type '{ item: { id: number; title: string; dueAt: Date | null; completeddueAt: Date | null; createdAt: Date; modifiedAt: Date; }; }' is not assignable to type 'IntrinsicAttributes & { id: number; title: string; dueAt: Date | null; completeddueAt: Date | null; createdAt: Date; modifiedAt: Date; }'.
+  Property 'item' does not exist on type 'IntrinsicAttributes & { id: number; title: string; dueAt: Date | null; completeddueAt: Date | null; createdAt: Date; modifiedAt: Date; }'.ts(2322)
 */

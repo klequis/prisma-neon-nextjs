@@ -1,4 +1,5 @@
-12/12/23
 
-- added `date-fns`
+
+**12/12/23**
 - tsconfig.json: added compiler option: `"strictNullChecks": true`
+- added `date-fns`

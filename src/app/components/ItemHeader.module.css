@@ -1,0 +1,9 @@
+.headerStatusRow {
+    display: flex;
+    margin-bottom: 8px
+}
+
+.headerStatusItem {
+    font-size: 0.8em;
+    margin-right: 10px
+}
