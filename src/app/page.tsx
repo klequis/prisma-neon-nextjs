@@ -24,6 +24,8 @@ export default async function Home() {
   const items = await fetchItems()
   return (
     <main>
+      <button className="btn btn-primary">Button</button>
+
       {items.map((i: PrismaItem) => {
         return <Item item={i} key={i.id} />
       })}
