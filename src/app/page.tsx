@@ -24,9 +24,13 @@ export default async function Home() {
   const items = await fetchItems()
   return (
     <main className="container mx-auto">
+      <div className="join join-vertical w-full">
       {items.map((i: PrismaItem) => {
-        return <Item item={i} key={i.id} />
+        return (
+          <Item item={i} key={i.id} />
+        )
       })}
+      </div>
     </main>
   )
 }
