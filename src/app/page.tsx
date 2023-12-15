@@ -23,9 +23,7 @@ export default async function Home() {
   // console.log('items', items)
   const items = await fetchItems()
   return (
-    <main>
-      <button className="btn btn-primary">Button</button>
-
+    <main className="container mx-auto">
       {items.map((i: PrismaItem) => {
         return <Item item={i} key={i.id} />
       })}

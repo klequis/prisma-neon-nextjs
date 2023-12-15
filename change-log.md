@@ -1,5 +1,8 @@
 **12/14/23**
-Added Tailwind & DaisyUI
+Added 
+- Tailwind & DaisyUI
+- @tailwindcss/typography
+
 
 **12/13/23**
 Added `date-fns`
