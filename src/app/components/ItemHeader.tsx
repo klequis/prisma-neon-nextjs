@@ -14,12 +14,16 @@ interface Props {
   modifiedAt: Date;
   dueAt: Date | null;
   completedAt: Date | null;
+  // onClick: () => void
 }
 
 export function ItemHeader(props: Props) {
   return (
-    <div className="collapse collapse-arrow join-item border border-base-300">
-      <input type="radio" name="note-accordion" value="id1" />
+    <div 
+      className="collapse collapse-arrow join-item border border-base-300"  
+      // onClick={() => {console.log('click click')}}
+    >
+      <input type="radio" name="note-accordion" value="id1"/>
       <div className="collapse-title text-xl font-medium">
         <h1>{props.title}</h1>
         <div className={styles.headerStatusRow}>

@@ -1,25 +1,34 @@
 "use client"
 import { useState } from "react";
-import { Item as PrismaItem } from "@prisma/client";
+import { PrismaClient, Item as PrismaItem } from "@prisma/client";
 // import { format } from 'date-fns'
 import styles from "./Item.module.css";
 import { ItemHeader } from "./ItemHeader";
 
+// sconst prisma = new PrismaClient()
+
+
 export function Item({ item }: { item: PrismaItem }) {
-  // const []
-  // const onAccordionClick = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   return e = !e.target.value
-  // }
+  const itemHeaderClick = () => {
+    console.log('clicked')
+    // fetch body
+
+  }
   return (
-    <div key={item.id} className={styles.item}>
+    <div 
+      key={item.id} 
+      className={styles.item}
+      onClick={itemHeaderClick}
+    >
       <ItemHeader
         title={item.title}
         createdAt={item.createdAt}
         modifiedAt={item.modifiedAt}
         dueAt={item.dueAt}
         completedAt={item.completedAt}
+        // onClick={itemHeaderClick}
       />
     </div>
       
-  );
+  );  
 }
