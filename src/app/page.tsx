@@ -45,6 +45,14 @@ export interface ContactType {
   modifiedAt: Date;
 }
 
+export interface NoteType {
+  id: number;
+  body: string;
+  item_id: number;
+  createdAt: Date;
+  modifiedAt: Date;
+}
+
 export interface FullItemType {
   id: number,
   title: string,
@@ -52,22 +60,8 @@ export interface FullItemType {
   completedAt: Date | null,
   createdAt: Date,
   modifiedAt: Date,
-  // contacts: {
-  //   id: number;
-  //   name: string;
-  //   item_id: number;
-  //   createdAt: Date;
-  //   modifiedAt: Date;
-  // }[]
   contacts: ContactType[]
-  notes: {
-    id: number;
-    body: string;
-    item_id: number;
-    createdAt: Date;
-    modifiedAt: Date;
-  }[]
-
+  notes: NoteType[]
 }[]
 
 export default async function Home() {
