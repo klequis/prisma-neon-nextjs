@@ -73,14 +73,14 @@ const fetchItems = async (): Promise<PrismaItem[]> => {
     // select: {
     //   dueAt: true
     // }
-    // include: {
-    //   contacts: {
-    //     // include: {
-    //     //   phones: {}
-    //     // }
-    //   },
-    //   notes: {}
-    // }
+    include: {
+      contacts: {
+        // include: {
+        //   phones: {}
+        // }
+      },
+      notes: {}
+    }
   })
   // console.log("items", items);
   // const a = items[0]
