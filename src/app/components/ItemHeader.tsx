@@ -1,12 +1,7 @@
 import { format } from "date-fns";
 import styles from "./ItemHeader.module.css";
+import { formatDate } from '../page'
 
-function formatDate(date: Date | null) {
-  if (date === null) {
-    return "none";
-  }
-  return format(date, "dd/LL/yyyy hh:mm a");
-}
 
 interface Props {
   title: string;

@@ -5,24 +5,22 @@ import {
   Item as PrismaItem,
 } from "@prisma/client";
 import { Item } from "./components/Item";
+import { format } from 'date-fns'
 
-const prisma = new PrismaClient();
+export function formatDate(date: Date | null | undefined) {
+  if (date === null || date === undefined) {
+    return "none";
+  }
+  return format(date, "dd/LL/yyyy hh:mm a");
+}
 
 export interface ItemType {
   id: number;
   title: string;
   notes: Note[];
   contacts: Contact[];
-  dueAt?: Date;
-  completedAt?: Date;
-  createdAt: Date;
-  modifiedAt: Date;
-}
-
-export interface NoteType {
-  id: number;
-  body: string;
-  item_id: number;
+  dueAt?: Date | null;
+  completedAt?: Date | null;
   createdAt: Date;
   modifiedAt: Date;
 }
@@ -35,38 +33,63 @@ export interface ContactType {
   modifiedAt: Date;
 }
 
-interface ItemContactsNotesType {
-  item: ItemType;
-  contacts: ContactType[];
-  notes: NoteType[];
+export interface NoteType {
+  id: number;
+  body: string;
+  item_id: number;
+  createdAt: Date;
+  modifiedAt: Date;
 }
-[];
 
-const fetchItems = async (): Promise<ItemContactsNotesType[]> => {
-  // const items = await prisma.item.findMany({
-  //   select: {
-  //     id: true,
-  //     title: true,
-  //     notes: true,
-  //     contacts: true,
-  //     dueAt: true,
-  //     completedAt: true,
-  //     createdAt: true,
-  //     modifiedAt: true,
-  //     contacts: {},
-  //     notes: {},
-  //   },
-  // });
-  const items = await prisma.item.findMany({
-    include: {
-      contacts: {},
-      notes: {}
-    }
+export interface FullItemType {
+    id: number,
+    title: string,
+    dueAt?: Date,
+    completedAt?: Date,
+    createdAt: Date,
+    modifiedAt: Date,
+    contacts: {
+      id: number;
+      name: string;
+      item_id: number;
+      createdAt: Date;
+      modifiedAt: Date;
+    }[]
+    notes: {
+      id: number;
+      body: string;
+      item_id: number;
+      createdAt: Date;
+      modifiedAt: Date;
+    }[]
+  
+}[]
+
+const prisma = new PrismaClient();
+
+const fetchItems = async (): Promise<PrismaItem[]> => {
+  
+  const i = await prisma.item.findMany({
+    // select: {
+    //   dueAt: true
+    // }
+    // include: {
+    //   contacts: {
+    //     // include: {
+    //     //   phones: {}
+    //     // }
+    //   },
+    //   notes: {}
+    // }
   })
   // console.log("items", items);
-  items.forEach(x => console.log(x))
-  return items;
+  // const a = items[0]
+  // console.log('a', a)
+  // items.forEach(x => console.log(typeof x))
+  return i;
 };
+
+
 
 export default async function Home() {
   // console.log('items', items)
@@ -74,6 +97,7 @@ export default async function Home() {
   return (
     <main className="container mx-auto">
       <div className="join join-vertical w-full">
+        {/* <h1>dueAt: {items[0].dueAt?.toString()}</h1> */}
         {items.map((i: PrismaItem) => {
           return <Item item={i} key={i.id} />;
         })}

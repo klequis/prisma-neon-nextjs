@@ -1,11 +1,9 @@
 "use client"
 import { useState } from "react";
 import { PrismaClient, Item as PrismaItem } from "@prisma/client";
-// import { format } from 'date-fns'
 import styles from "./Item.module.css";
 import { ItemHeader } from "./ItemHeader";
-
-// sconst prisma = new PrismaClient()
+import { FullItemType, formatDate } from "../page";
 
 
 export function Item({ item }: { item: PrismaItem }) {
