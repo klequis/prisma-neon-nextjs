@@ -25,7 +25,7 @@ async function main() {
               create: [
                 {
                   phone: '111-111-1111',
-                  phone_type: 'mobile',
+                  phoneType: 'mobile',
                 },
               ],
             },
@@ -36,7 +36,7 @@ async function main() {
               create: [
                 {
                   phone: '222-222-2222',
-                  phone_type: 'mobile',
+                  phoneType: 'mobile',
                 },
               ],
             },
@@ -63,7 +63,7 @@ async function main() {
               create: [
                 {
                   phone: '333-333-3333',
-                  phone_type: 'mobile',
+                  phoneType: 'mobile',
                 },
               ],
             },

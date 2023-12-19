@@ -3,29 +3,37 @@ import { useState } from "react";
 import { PrismaClient, Item as PrismaItem } from "@prisma/client";
 import styles from "./Item.module.css";
 import { ItemHeader } from "./ItemHeader";
-import { FullItemType, formatDate } from "../page";
+import { FullItemType } from "../page";
+import { ItemContact } from "./ItemContact";
 
 
-export function Item({ item }: { item: PrismaItem }) {
+export function Item({ fullItem }: { fullItem: FullItemType }) {
   const itemHeaderClick = () => {
     console.log('clicked')
     // fetch body
 
   }
+  const {contacts, notes} = fullItem
   return (
     <div 
-      key={item.id} 
+      key={fullItem.id} 
       className={styles.item}
       onClick={itemHeaderClick}
     >
       <ItemHeader
-        title={item.title}
-        createdAt={item.createdAt}
-        modifiedAt={item.modifiedAt}
-        dueAt={item.dueAt}
-        completedAt={item.completedAt}
+        title={fullItem.title}
+        createdAt={fullItem.createdAt}
+        modifiedAt={fullItem.modifiedAt}
+        dueAt={fullItem.dueAt}
+        completedAt={fullItem.completedAt}
         // onClick={itemHeaderClick}
       />
+      {contacts.map(c => {
+        return (
+          <ItemContact key={c.id} contact={c}  />
+        )
+      })}
+      
     </div>
       
   );  

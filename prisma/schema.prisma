@@ -49,8 +49,8 @@ model Phone {
   id         Int     @id @default(autoincrement())
   phone      String
   phoneType String @map("phone_type")
-  contact    Contact @relation(fields: [contact_id], references: [id])
-  contact_id Int
+  contact    Contact @relation(fields: [contactId], references: [id])
+  contactId Int @map("contact_id")
 
   @@map("phones")
 }
