@@ -1,12 +1,21 @@
 import { NoteType } from "../page";
 import { formatDate } from "../page";
-export function Note({ note }: { note: NoteType }) {
-  const { body, createdAt, modifiedAt } = note;
+
+export default function Note({
+  note
+}:
+{note: NoteType}
+) {
+  const {createdAt, body} = note
   return (
-    <div>
-      <div>createdAt: {formatDate(createdAt)}</div>
-      <div>modifiedAt: {formatDate(modifiedAt)}</div>
-      <div>{body}</div>
+    <div className="card w-full shadow hover:shadow-lg bg-base-100 p-2 mb-2">
+      {/* <div className="columns-2"> */}
+      {/* <div>modified: {modifiedAt}</div> */}
+      <div className="font-medium">{formatDate(createdAt)}</div>
+      <div className="prose">{body}</div>
     </div>
   );
 }
+
+// shadow hover:shadow-lg
+// border-4 

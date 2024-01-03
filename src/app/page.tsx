@@ -4,6 +4,7 @@ import {
 } from "@prisma/client";
 import { Item } from "./components/Item";
 import { format } from 'date-fns'
+import { ItemDates } from './components/ItemDates';
 
 export function formatDate(date: Date | null | undefined) {
   if (date === null || date === undefined) {
@@ -14,10 +15,16 @@ export function formatDate(date: Date | null | undefined) {
 
 const prisma = new PrismaClient();
 
-const fetchItems = async (): Promise<FullItemType[]> => {
-  
+/*
+  I took away the return type of fetchItems and
+  now the error on `return i` is gone but there is
+  a new error in `Home()`
+*/
+const fetchItems = async () => {
+  // console.log('zzz', FullItemType)
   const i = await prisma.item.findMany({
     include: {
+      dates: {},
       contacts: {
         include: {
           phones: {}
@@ -26,12 +33,13 @@ const fetchItems = async (): Promise<FullItemType[]> => {
       notes: {}
     }
   })
+  console.log(i)
   return i;
 };
 
 export interface PhoneType {
   id: number
-  phone: String
+  phoneNumber: String
   phoneType: String
   contactId: number
 }
@@ -53,13 +61,17 @@ export interface NoteType {
   modifiedAt: Date;
 }
 
-export interface FullItemType {
-  id: number,
-  title: string,
+export interface ItemDatesType {
   dueAt: Date | null,
   completedAt: Date | null,
   createdAt: Date,
   modifiedAt: Date,
+}
+
+export interface FullItemType {
+  id: number,
+  title: string,
+  itemDates: ItemDatesType
   contacts: ContactType[]
   notes: NoteType[]
 }[]
@@ -67,7 +79,7 @@ export interface FullItemType {
 export default async function Home() {
   const items = await fetchItems();
   return (
-    <main className="container mx-auto">
+    <main className="container mx-auto md:mx-auto">
       <div className="join join-vertical w-full">
         {/* <h1>dueAt: {items[0].dueAt?.toString()}</h1> */}
         {items.map((i: FullItemType) => {

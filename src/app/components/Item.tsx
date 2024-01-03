@@ -1,40 +1,25 @@
-"use client";
-import { useState } from "react";
-import { PrismaClient, Item as PrismaItem } from "@prisma/client";
-import styles from "./Item.module.css";
-import { ItemHeader } from "./ItemHeader";
 import { FullItemType } from "../page";
-import { ItemContact } from "./ItemContact";
+import Contacts from "./Contacts";
 import { ItemDates } from "./ItemDates";
+import Notes from "./Notes";
 
 export function Item({ fullItem }: { fullItem: FullItemType }) {
-  const itemHeaderClick = () => {
-    console.log("clicked");
-    // fetch body
-  };
-  const { contacts, notes } = fullItem;
+  // const itemHeaderClick = () => {
+  //   console.log("clicked");
+  //   // fetch body
+  // };
+  const { title, itemDates, contacts, notes } = fullItem;
   return (
-    <>
-      <div className="collapse collapse-arrow join-item border border-base-300">
-        <input type="radio" name="note-accordion" value="id1" />
-        <div className="collapse-title text-xl font-medium">
-          <h1>{fullItem.title}</h1>
-          {/* <!-- DATES START HERE --> */}
-          <ItemDates
-            createdAt={fullItem.createdAt}
-            modifiedAt={fullItem.modifiedAt}
-            dueAt={fullItem.dueAt}
-            completedAt={fullItem.completedAt}
-          />
-          {/* <!-- DATES END HERE --> */}
-        </div>
-        <div className="collapse-content">
-          <p>CONTACTS AND NOTES GO HERE</p>
-          {contacts.map((c) => {
-            return <ItemContact key={c.id} contact={c} />;
-          })}
-        </div>
+    <div className="collapse collapse-arrow border border-base-300 bg-base-200">
+      <input type="radio" name="note-accordion" value="id1" />
+      <div className="collapse-title text-xl font-medium">
+        {title}
+        <ItemDates itemDates={itemDates} />
       </div>
-    </>
-  );
+      <div className="collapse-content">
+        <Contacts contacts={contacts}/>
+        <Notes notes={notes} />
+      </div>
+    </div>
+  )
 }
