@@ -1,6 +1,8 @@
 import { NoteType } from '../page'
 import Note from './Note'
 
+
+
 export default function Notes(
   { notes }: 
   {notes: NoteType[]}
@@ -8,7 +10,9 @@ export default function Notes(
     return (
     <>
         {
-            notes.map(n => {return <Note key={n.id} note={n} />})
+            notes.map((note) => (
+                <Note key={note.id} note={note} />
+            )) 
         }
     </>
     )
