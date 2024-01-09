@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Item {
+  id           Int       @id @default(autoincrement())
+  // id String @id @default(uuid())                 // can do this
+  title        String
+  notes        Note[]
+  contacts     Contact[]
+  itemDates    ItemDates @relation(fields: [itemDatesId], references: [id])
+  itemDatesId  Int       @unique
+                      // @relation(fields: [profileId], references: [id]) // references `id` of `Profile`
+  @@map("items")
+}
+// ISO 8601 date time format
+// 26th October 2022, 17:30 hours, 00 seconds, and 00 milliseconds
+// for eastern time is
+// 2022-10-26T17:30:00.000-04:00
+model ItemDates {
+  id           Int       @id @default(autoincrement())
+  dueAt        DateTime? @map("due_at")
+  completedAt  DateTime? @map("completed_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  modifiedAt   DateTime  @updatedAt @map("modified_at")
+  item         Item?
+
+  @@map("item_dates")
+}
+
+model Note {
+  id          Int      @id @default(autoincrement())
+  body        String
+  item        Item     @relation(fields: [item_id], references: [id])
+  item_id     Int // scalar field
+  createdAt   DateTime @default(now()) @map("created_at")
+  modifiedAt  DateTime @updatedAt @map("modified_at")
+
+  @@map("notes")
+}
+
+model Contact {
+  id          Int      @id @default(autoincrement())
+  name        String
+  phones      Phone[]
+  item        Item     @relation(fields: [item_id], references: [id])
+  item_id     Int
+  createdAt   DateTime @default(now()) @map("created_at")
+  modifiedAt  DateTime @updatedAt @map("modified_at")
+
+  @@map("contacts")
+}
+
+model Phone {
+  id         Int     @id @default(autoincrement())
+  number     String
+  type       String
+  contact    Contact @relation(fields: [contactId], references: [id])
+  contactId  Int @map("contact_id")
+
+  @@map("phones")
+}

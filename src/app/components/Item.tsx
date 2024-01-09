@@ -10,9 +10,9 @@ export function Item({ fullItem }: { fullItem: FullItemType }) {
   // };
   // console.log('fullItem', fullItem)
   const { title, itemDates, contacts, notes } = fullItem;
-  console.log('itemDates', itemDates)
+  // console.log('itemDates', itemDates)
   return (
-    <div className="collapse collapse-arrow border border-base-300 bg-base-200">
+    <div className="collapse collapse-arrow border">
       <input type="radio" name="note-accordion" value="id1" />
       <div className="collapse-title text-xl font-medium">
         {title}

@@ -1,4 +1,10 @@
-klequis/hello-prisma-neon moved to a Next.js project
+- is types/index.ts needed?
+- are styles global.css needed?
+- what about tailwind.config.ts/js differences?
+
+
+
+
 
 # Migration Process
 

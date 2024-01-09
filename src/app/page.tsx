@@ -1,19 +1,18 @@
 import { Item } from "./components/Item";
-import { format } from 'date-fns'
-import prismaClient from '../lib/prisma';
-import { Key } from "react";
+import { format } from "date-fns";
+import prismaClient from "../lib/prisma";
 
 export interface PhoneType {
-  id: number
-  number: String
-  type: String
-  contactId: number
+  id: number;
+  number: String;
+  type: String;
+  contactId: number;
 }
 
 export interface ContactType {
   id: number;
   name: string;
-  phones: PhoneType[]
+  phones: PhoneType[];
   item_id: number;
   createdAt: Date;
   modifiedAt: Date;
@@ -28,19 +27,20 @@ export interface NoteType {
 }
 
 export interface ItemDatesType {
-  dueAt: Date | null,
-  completedAt: Date | null,
-  createdAt: Date,
-  modifiedAt: Date,
+  dueAt: Date | null;
+  completedAt: Date | null;
+  createdAt: Date;
+  modifiedAt: Date;
 }
 
 export interface FullItemType {
-  id: number,
-  title: string,
-  itemDates: ItemDatesType
-  contacts: ContactType[]
-  notes: NoteType[]
-}[]
+  id: number;
+  title: string;
+  itemDates: ItemDatesType;
+  contacts: ContactType[];
+  notes: NoteType[];
+}
+[];
 
 export function formatDate(date: Date | null | undefined) {
   if (date === null || date === undefined) {
@@ -55,23 +55,23 @@ const fetchItems = async () => {
       itemDates: {},
       contacts: {
         include: {
-          phones: {}
-        }
+          phones: {},
+        },
       },
-      notes: {}
-    }
-  })
+      notes: {},
+    },
+  });
   return i;
 };
 
 export default async function Home() {
-  const items = await fetchItems()
+  const items = await fetchItems();
   return (
     <main className="container mx-auto md:mx-auto">
       <div className="join join-vertical w-full">
-        {
-          items.map((i: FullItemType) => (<Item key={i.id} fullItem={i} />))
-        }
+        {items.map((i: FullItemType) => (
+          <Item key={i.id} fullItem={i} />
+        ))}
       </div>
     </main>
   );

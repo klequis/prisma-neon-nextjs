@@ -8,11 +8,11 @@ export default function Note({
 ) {
   const {createdAt, body} = note
   return (
-    <div className="card w-full shadow hover:shadow-lg bg-base-100 p-2 mb-2">
+    <div className="card w-full shadow hover:shadow-lg p-2 mb-2">
       {/* <div className="columns-2"> */}
       {/* <div>modified: {modifiedAt}</div> */}
       <div className="font-medium">{formatDate(createdAt)}</div>
-      <div className="prose">{body}</div>
+      <div>{body}</div>
     </div>
   );
 }
